@@ -1,11 +1,11 @@
 window.onload = startPreloadChain;
 
-const whiteStonesArr = ['white-stone1', 'white-stone2', 'white-stone3', 'white-stone4', 'white-stone5', 'white-stone6'];
-const blackStonesArr = ['black-stone1', 'black-stone2', 'black-stone3', 'black-stone4', 'black-stone5', 'black-stone6',
+const monkArr = ['white-stone1', 'white-stone2', 'white-stone3', 'white-stone4', 'white-stone5', 'white-stone6'];
+const twoMonkArr = ['black-stone1', 'black-stone2', 'black-stone3', 'black-stone4', 'black-stone5', 'black-stone6',
 'black-stone1_reverse', 'black-stone2_reverse', 'black-stone3_reverse', 'black-stone4_reverse', 'black-stone5_reverse', 'black-stone6_reverse'];
 const bagsArr = ['bag-white'];
 
-let stonesData = null;
+/*let stonesData = null;
 
 
 function startPreloadChain(){
@@ -284,4 +284,4 @@ function resizeWindow(){
 		let vh = window.innerHeight * 0.01;
 		document.documentElement.style.setProperty('--vh', `${vh}px`);
 	});
-}
+}*/

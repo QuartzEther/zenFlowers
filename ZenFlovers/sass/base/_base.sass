@@ -15,24 +15,13 @@ html
 	scrollbar-width: none //Firefox
 
 
-.my-body
-	&::before
-		content: ''
-		position: fixed
-		left: 0
-		right: 0
-		top: 0
-		bottom: 0
-		z-index: -1
-		background: url("../img/bg_img.jpg") center / cover no-repeat
-	
-
 .container
 	margin: 0 auto
-	background-color: $container-color
 	max-width: $container-width
 	min-height: 100vh
 	position: relative
 	display: flex
+	flex-direction: column
 	align-items: center
 	justify-content: center
+	padding-top: 3rem

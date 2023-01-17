@@ -60,24 +60,43 @@ function init()
 	console.log(":::INIT:::");
 	const loadLayer = document.querySelector('.loading-layer');
 	loadLayer.style.display = 'none';
-	const mainLayer = document.querySelector('.meditation-layer');
+	const mainLayer = document.querySelector('.about-layer');
 	mainLayer.style.display = 'flex';
+
+	bodyListener();
+
+	initControls();
+}
+
+
+function bodyListener(){
+	const body = document.querySelector('body');
+	const mainLayer = document.querySelector('.about-layer');
+	const meditationLayer = document.querySelector('.meditation-layer');
+
+	function bodyClicked(){
+		mainLayer.style.setProperty('display', 'none');
+		meditationLayer.style.setProperty('display', 'flex');
+	}
+
+	body.addEventListener('click',bodyClicked, false);
+
+	meditationLayer.addEventListener('mouseover', () => {
+	 	body.removeEventListener('click', bodyClicked, false);
+	});
+}
+
+function initControls()
+{
+	const aboutLayer = document.querySelector('.about-layer');
+	const meditationLayer = document.querySelector('.meditation-layer');
+	const infoLayer = document.querySelector('.info-layer');
+
+
 }
 
 //-----------------------------------------------------------------------------------------------------
 /*
-function init()
-{
-	console.log(":::INIT:::");
-	const loadLayer = document.querySelector('.loading-layer');
-	loadLayer.style.display = 'none';
-	const mainLayer = document.querySelector('.main-layer');
-	mainLayer.style.display = 'flex';
-
-	resizeWindow();
-	initControls();
-}
-
 function initControls()
 {
 	const dirStonesImg = "../img/stones/";
@@ -259,38 +278,4 @@ function initControls()
 	
 }
 
-function fillText(stone)
-{
-	const id = stonesData.stones[stone];
-
-	const name = document.querySelector(".tittle__result_name");
-	const med = document.querySelector(".tittle__result_med");
-	const img = document.querySelector(".tittle__result_img");
-	const shortInter = document.querySelector(".tittle__result_short-inter");
-	const key = document.querySelector(".paragraph_key");
-	const inter = document.querySelector(".paragraph_inter");
-	const sugg = document.querySelector(".paragraph_sugg");
-
-	const tab = "&nbsp;&nbsp;&nbsp;&nbsp"
-
-	name.innerHTML = "<span>Ни-Зи</span>: " + stonesData.articles[id].name;
-	med.innerHTML = "<span>Медитация</span>: " + stonesData.articles[id].med;
-	img.innerHTML = "<span>Образ</span>: " + stonesData.articles[id].img;
-	shortInter.innerHTML = "<span>Интерпретация</span>: " + stonesData.articles[id].short_inter;
-	key.innerHTML = tab + "<span>Ключевое понятие</span> – " + stonesData.articles[id].key;
-	inter.innerHTML = tab + "<span>Интерпретация</span>: " + stonesData.articles[id].inter;
-	sugg.innerHTML = tab + "<span>Совет</span>: " + stonesData.articles[id].sugg;
-}
-
-function resizeWindow(){
-	let vh = window.innerHeight * 0.01;
-	document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-	// Мы прослушиваем событие resize
-	window.addEventListener('resize', () => {
-		//console.log("resize");
-		// Выполняем тот же скрипт, что и раньше
-		let vh = window.innerHeight * 0.01;
-		document.documentElement.style.setProperty('--vh', `${vh}px`);
-	});
 }*/

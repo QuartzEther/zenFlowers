@@ -475,6 +475,13 @@ p {
   font-style: italic;
 }
 
+.span_bold {
+  font-weight: bold;
+}
+.span_ital {
+  font-style: italic;
+}
+
 .loading-layer {
   display: flex;
   flex-direction: column;
@@ -499,7 +506,7 @@ p {
 .about-layer__tittle {
   margin-bottom: 3rem;
 }
-.about-layer__paragraph {
+.about-layer__text {
   max-width: 80%;
 }
 
@@ -511,11 +518,11 @@ p {
 .info-layer__tittle {
   margin-bottom: 3rem;
 }
-.info-layer__paragraph {
+.info-layer__text {
   max-width: 80%;
 }
 .info-layer__paragraph:not(:last-child) {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.2rem !important;
 }
 
 .meditation-layer {

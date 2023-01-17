@@ -1,29 +1,37 @@
 window.onload = startPreloadChain;
 
-const monkArr = ['white-stone1', 'white-stone2', 'white-stone3', 'white-stone4', 'white-stone5', 'white-stone6'];
-const twoMonkArr = ['black-stone1', 'black-stone2', 'black-stone3', 'black-stone4', 'black-stone5', 'black-stone6',
-'black-stone1_reverse', 'black-stone2_reverse', 'black-stone3_reverse', 'black-stone4_reverse', 'black-stone5_reverse', 'black-stone6_reverse'];
-const bagsArr = ['bag-white'];
-
-/*let stonesData = null;
-
-
 function startPreloadChain(){
 	console.log('startPreloadChain');
-
-	//+++DEBUG
-	// const mainLayer = document.querySelector('.main-layer');
-	// mainLayer.style.display = 'none';
-	//---DEBUG
-
-	preloadStones(whiteStonesArr.concat(blackStonesArr).concat(bagsArr), onStonesPreloaded);
-	
-	//+++DEBUG
-	// loadStonesData();
-	//---DEBUG
+	loadData('js/data.json');
 }
 
-function preloadStones(sources, callback) {
+function loadData(path){
+	console.log('loadData');
+
+	fetch(path)
+		.then(response=>response.json())
+		.then(result=>{
+			return randomData(result);
+		})
+		.catch(error=>{
+		  console.log(error);
+		})
+}
+
+function randomData(data){
+	const statement = data.statements[Math.floor(Math.random() * Object.keys(data.statements).length+1)];
+	const pict =  Object.keys(data.pictures[statement.img]).length>1 ? 
+			data.pictures[statement.img][Math.floor(Math.random() * Object.keys(data.pictures[statement.img]).length)]
+			: data.pictures[statement.img];
+	
+	/*Math.floor(Math.random() * Object.keys(data.pictures[statement.img]).length)*/
+	console.log(statement);
+	console.log(pict);
+	
+}
+
+//-----------------------------------------------------------------------------------------------------
+/*function preloadStones(sources, callback) {
 	const images = [];
 	let loadedImagesCounter = 0;
 	for(let i = 0; i < sources.length; i++)
@@ -41,20 +49,6 @@ function preloadStones(sources, callback) {
 function onStonesPreloaded(){
 	console.log('onStonesPreloaded');
 	loadStonesData();
-}
-
-function loadStonesData(){
-	console.log('loadStonesData');
-
-	fetch('/js/stonesData.json')
-		.then(response=>response.json())
-		.then(result=>{
-			stonesData = result;
-			return init();
-		})
-		.catch(error=>{
-		  console.log(error);
-		})
 }
 
 function init()

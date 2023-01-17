@@ -24,33 +24,46 @@ function randomData(data){
 			data.pictures[statement.img][Math.floor(Math.random() * Object.keys(data.pictures[statement.img]).length)]
 			: data.pictures[statement.img];
 	
-	/*Math.floor(Math.random() * Object.keys(data.pictures[statement.img]).length)*/
-	console.log(statement);
-	console.log(pict);
-	
+	preloadImg(pict, fillValues, statement);	
+}
+
+function preloadImg(source, callback, statement) {
+	img = new Image();
+	img.onload = ()=>{
+		callback(statement, source);
+	}
+	img.src = 'img/'+ source + '.jpg';
+}
+
+function fillValues(statement, img){
+	const picture = document.querySelector(".meditation-layer__img");
+	picture.src = 'img/'+ img + '.jpg';
+
+	const name = document.querySelector(".name");
+	name.innerHTML = statement.sage;
+
+	const text = document.querySelector(".meditation-layer__text");
+	statement.text.split("#").forEach((p)=>{
+		let paragraph = document.createElement("p");
+		paragraph.className = "meditation-layer__paragraph paragraph";
+        paragraph.innerHTML = p;
+
+		text.append(paragraph);
+	});
+}
+
+//-------------INIT-------------
+function init()
+{
+	console.log(":::INIT:::");
+	const loadLayer = document.querySelector('.loading-layer');
+	loadLayer.style.display = 'none';
+	const mainLayer = document.querySelector('.main-layer');
+	mainLayer.style.display = 'flex';
 }
 
 //-----------------------------------------------------------------------------------------------------
-/*function preloadStones(sources, callback) {
-	const images = [];
-	let loadedImagesCounter = 0;
-	for(let i = 0; i < sources.length; i++)
-	{
-		const srcName = sources[i];
-		images[srcName] = new Image();
-		images[srcName].onload = ()=>{
-			if(++loadedImagesCounter >= sources.length)
-				callback(images);
-		}
-		images[srcName].src = './img/stones/'+ srcName + '.png';
-	}
-}
-
-function onStonesPreloaded(){
-	console.log('onStonesPreloaded');
-	loadStonesData();
-}
-
+/*
 function init()
 {
 	console.log(":::INIT:::");

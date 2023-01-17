@@ -475,6 +475,22 @@ p {
   font-style: italic;
 }
 
+.loading-layer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.loading-layer__tittle {
+  margin-bottom: 2rem;
+}
+.loading-layer hr {
+  border-bottom: 0.05rem solid #000000;
+  margin: 0 auto;
+}
+.loading-layer img {
+  width: 7rem;
+}
+
 .about-layer {
   display: flex;
   flex-direction: column;
@@ -509,7 +525,7 @@ p {
 }
 .meditation-layer img {
   max-height: 40rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 .meditation-layer__text {
   max-width: 80%;
@@ -566,6 +582,10 @@ img {
 }
 
 .about-layer {
+  display: none;
+}
+
+.meditation-layer {
   display: none;
 }
 

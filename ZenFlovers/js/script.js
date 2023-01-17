@@ -50,6 +50,8 @@ function fillValues(statement, img){
 
 		text.append(paragraph);
 	});
+
+	init()
 }
 
 //-------------INIT-------------
@@ -58,7 +60,7 @@ function init()
 	console.log(":::INIT:::");
 	const loadLayer = document.querySelector('.loading-layer');
 	loadLayer.style.display = 'none';
-	const mainLayer = document.querySelector('.main-layer');
+	const mainLayer = document.querySelector('.meditation-layer');
 	mainLayer.style.display = 'flex';
 }
 

@@ -525,7 +525,6 @@ p {
 }
 .meditation-layer img {
   max-height: 40rem;
-  margin-bottom: 3rem;
 }
 .meditation-layer__text {
   max-width: 80%;
@@ -534,6 +533,7 @@ p {
 .meditation-layer__sage {
   width: 80%;
   text-align: right !important;
+  margin-bottom: 8rem;
 }
 
 .copyright {

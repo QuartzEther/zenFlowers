@@ -1,0 +1,63 @@
+//---------------Планшет горизонталь-----------------
+@media (max-width: 1199px)
+    //--------------------adress bar static------------------------
+    html, body
+        height: 100%
+        overflow: hidden
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+
+    .my-body
+        //height: 100%
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        overflow: scroll
+        -webkit-overflow-scrolling: touch
+        overflow-scrolling: touch
+
+    .container
+        min-height: 100%
+    //-----------------------------------------------------------
+        
+    html
+        font-size: 60%
+
+    .info,.back
+        position: absolute
+
+
+@media (max-width: 991px)        
+    html
+        font-size: 55%
+    .copyright
+        position: absolute
+
+@media (max-width: 991px) and (orientation: landscape)
+    .info,.back,.copyright
+        position: fixed
+
+@media (max-width: 575px)
+    html
+        font-size: 50%
+    .container
+        max-width: 100%
+        img
+            max-width: 100%
+    .copyright
+        position: fixed
+
+    .info,.back
+        position: fixed
+        top: 1rem
+        right: 1rem
+
+    .btn
+        height: 5rem
+        img
+            width: 5rem

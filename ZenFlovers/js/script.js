@@ -63,17 +63,13 @@ function init()
 	const mainLayer = document.querySelector('.about-layer');
 	mainLayer.style.display = 'flex';
 
-	const info = document.querySelector('.info');
-	info.style.display = 'none';
-
 	bodyListener();
-
 	initControls();
 }
 
 
 function bodyListener(){
-	const body = document.querySelector('body');
+	const body = document.querySelector('.my-body');
 	const mainLayer = document.querySelector('.about-layer');
 	const meditationLayer = document.querySelector('.meditation-layer');
 
@@ -97,150 +93,40 @@ function fromToDisplay(from, to, trigger){
 
 function initControls()
 {
+	const container = document.querySelector('.my-body');
 	const meditationLayer = document.querySelector('.meditation-layer');
 	const infoLayer = document.querySelector('.info-layer');
 
 	const info = document.querySelector('.info');
-	const back = document.querySelector('.info-layer__btn');
+	const back = document.querySelector('.back');
 
-	fromToDisplay([meditationLayer, info], [infoLayer], info);
-	fromToDisplay([infoLayer], [meditationLayer, info], back);
+	fromToDisplay([meditationLayer, info], [infoLayer, back], info);
+	fromToDisplay([infoLayer, back], [meditationLayer, info], back);
+
+	container.addEventListener('scroll', update);
 
 
 }
 
-//-----------------------------------------------------------------------------------------------------
-/*
-function initControls()
-{
-
-	//Buttons push
-	mainBtn.addEventListener('mousedown', () => {
-		mainLayer.style.setProperty("animation", animationOff);
-		activePage = stoneWhiteLayer;
-		setTimeout(() => {
-			mainLayer.style.setProperty('display', 'none');
-			stoneWhiteLayer.style.setProperty('display', 'flex');
-			stoneWhiteLayer.style.setProperty("animation", animationOn);
-		}, timeoutNext * 1000);
-	});
-
-	whiteStoneBtn.addEventListener('mousedown', () => {
-		stoneWhiteLayer.style.setProperty("animation", animationOff);
-		activePage = stoneBlackLayer;
-		setTimeout(() => {
-			stoneWhiteLayer.style.setProperty('display', 'none');
-			stoneBlackLayer.style.setProperty('display', 'flex');
-			stoneBlackLayer.style.setProperty("animation", animationOn);
-		}, timeoutNext * 1000);
-	});
-
-	blackStoneBtn.addEventListener('mousedown', () => {
-		stoneBlackLayer.style.setProperty("animation", animationOff);
-		fillText(stone);
-		activePage = resultLayer;
-		setTimeout(() => {
-			stoneBlackLayer.style.setProperty('display', 'none');
-			resultLayer.style.setProperty('display', 'block');
-			resultLayer.style.setProperty("animation", animationOn);
-		}, timeoutNext * 1000);
-	});
-
-	questionBtn.addEventListener('mousedown', () => {
-		resultLayer.style.setProperty("animation", animationOff);
-		activePage = mainLayer;
-
-		whiteStone.style.setProperty("transform", "scale(0.6) translateY(20rem)");
-		whiteStone.style.setProperty("opacity", "0");
-		whiteStoneBag.style.setProperty("animation", "heardBeat 2s ease-in-out infinite");
-		whiteStoneBag.style.setProperty("pointer-events","auto");
-		whiteStoneBtn.style.setProperty("visibility","hidden");
-	
-		blackStone.style.setProperty("transform", "scale(0.6) translateY(20rem)");
-		blackStone.style.setProperty("opacity", "0");
-		blackStoneBag.style.setProperty("animation", "heardBeat 2s ease-in-out infinite");
-		blackStoneBag.style.setProperty("pointer-events","auto");
-		blackStoneBtn.style.setProperty("visibility","hidden");
-
-		stone = "";
-
-		setTimeout(() => {
-			resultLayer.style.setProperty('display', 'none');
-			mainLayer.style.setProperty('display', 'flex');
-			mainLayer.style.setProperty("animation", animationOn);
-		}, timeoutNext * 1000);
-	});
-
-	info.addEventListener('mousedown', () => {
-		activePage.style.setProperty("animation", animationOff);
-		setTimeout(() => {
-			activePage.style.setProperty('display', 'none');
-			infoLayer.style.setProperty('display', 'flex');
-			infoLayer.style.setProperty("animation", animationOn);
-		}, timeoutNext * 1000);
-	});
-
-	infoBtn.addEventListener('mousedown', () => {
-		infoLayer.style.setProperty("animation", animationOff);
-		setTimeout(() => {
-			infoLayer.style.setProperty('display', 'none');
-			activePage.style.setProperty('display', activePage==resultLayer?'block':'flex');
-			activePage.style.setProperty("animation", animationOn);
-		}, timeoutNext * 1000);
-	});
-
-
-	//Bags push & random stones
-
-	whiteStoneBag.addEventListener('mousedown', () => {
-		whiteStoneBag.style.setProperty("animation", "none 2s ease-in-out infinite");
-			whiteStoneBag.style.setProperty("pointer-events","none");
-
-		let whiteSt = arrayRandElement(whiteStonesArr);
-		stone+="w"+ whiteSt[whiteSt.length-1];
-
-		whiteSt = dirStonesImg+whiteSt+fileType;
-		whiteStoneImg[0].src=whiteSt;
-		whiteStoneImg[1].src=whiteSt;
-
-		setTimeout(() => {
-			whiteStone.style.setProperty("transform", "scale(1) translateY(0)");
-			whiteStone.style.setProperty("opacity", "1");
-			whiteStoneBtn.style.setProperty("visibility","visible");
-		}, timeoutSec * 1000);
-		//ommanipadmehum();
-	});
-
-	blackStoneBag.addEventListener('mousedown', () => {
-		blackStoneBag.style.setProperty("animation", "none 2s ease-in-out infinite")
-		blackStoneBag.style.setProperty("pointer-events","none");
-
-		let blackSt = arrayRandElement(blackStonesArr);
-		stone+="_b"+ blackSt[11];
-		stone+=blackSt[blackSt.length-1]=='e'?'r':'';
-
-		blackSt = dirStonesImg+blackSt+fileType;
-		blackStoneImg[0].src=blackSt;
-		blackStoneImg[1].src=blackSt;
-
-		//console.log(blackSt + "; " + stone);
-
-		setTimeout(() => {
-			blackStone.style.setProperty("transform", "scale(1) translateY(0)");
-			blackStone.style.setProperty("opacity", "1");
-		
-			blackStoneBtn.style.setProperty("visibility","visible");
-		}, timeoutSec * 1000);
-
-		//ommanipadmehum();
-	});
-
-	//Native scroling
-	document.body.addEventListener("touchmove", function(event) {
-		event.preventDefault();
-		event.stopPropagation();
-	}, false);
-	
+function update() {
+	const infoLayer = document.querySelector(".info-layer");
+	const trigger = document.querySelector(".info-layer__tittle");
+	const back = document.querySelector(".back");
+	if(infoLayer.getBoundingClientRect().width<576){
+		if (trigger.getBoundingClientRect().y<0){
+			console.log("!");
+			back.style.top = ".5rem";
+			back.style.right = ".5rem";
+			back.style.height = "3rem";
+			back.style.width = "3rem";
+		}else{
+			back.style.top = "1rem";
+			back.style.right = "1rem";
+			back.style.height = "5rem";
+			back.style.width = "5rem";
+		}
+	}else{
+		back.style.height = "4rem";
+		back.style.width = "4rem";
+	}
 }
-
-}*/

@@ -63,6 +63,9 @@ function init()
 	const mainLayer = document.querySelector('.about-layer');
 	mainLayer.style.display = 'flex';
 
+	const info = document.querySelector('.info');
+	info.style.display = 'none';
+
 	bodyListener();
 
 	initControls();
@@ -74,23 +77,34 @@ function bodyListener(){
 	const mainLayer = document.querySelector('.about-layer');
 	const meditationLayer = document.querySelector('.meditation-layer');
 
-	function bodyClicked(){
+	function bodyClicked(){	
+		const info = document.querySelector('.info');
+		info.style.display = 'block';
+
 		mainLayer.style.setProperty('display', 'none');
 		meditationLayer.style.setProperty('display', 'flex');
+		body.removeEventListener('click', bodyClicked, false);
 	}
-
 	body.addEventListener('click',bodyClicked, false);
+}
 
-	meditationLayer.addEventListener('mouseover', () => {
-	 	body.removeEventListener('click', bodyClicked, false);
-	});
+function fromToDisplay(from, to, trigger){
+	trigger.addEventListener('click', () =>{
+		from.forEach((elem)=>elem.style.display = 'none');
+		to.forEach((elem)=>elem.style.display = 'flex');
+	})
 }
 
 function initControls()
 {
-	const aboutLayer = document.querySelector('.about-layer');
 	const meditationLayer = document.querySelector('.meditation-layer');
 	const infoLayer = document.querySelector('.info-layer');
+
+	const info = document.querySelector('.info');
+	const back = document.querySelector('.info-layer__btn');
+
+	fromToDisplay([meditationLayer, info], [infoLayer], info);
+	fromToDisplay([infoLayer], [meditationLayer, info], back);
 
 
 }
@@ -99,55 +113,6 @@ function initControls()
 /*
 function initControls()
 {
-	const dirStonesImg = "../img/stones/";
-	const fileType = ".png";
-	const timeoutNext = .53;
-	const timeoutSec = 0.3;
-	const animationOn = "displayOn 1s ease-out";
-	const animationOff = "displayOff " + timeoutNext + "s ease-out";
-		//запись кнопок и элементов для взаимодействия с ними
-	//--------------Layers--------------
-	const mainLayer = document.querySelector(".main-layer");
-	const stoneWhiteLayer = document.querySelector(".stone-layer_white");
-	const stoneBlackLayer = document.querySelector(".stone-layer_black");
-	const resultLayer = document.querySelector(".result-layer");
-	const infoLayer = document.querySelector(".info-layer");
-
-	//--------------Buttons-------------
-	const mainBtn = document.querySelector('.main-layer__btn');
-	const whiteStoneBtn = document.querySelector('.stone-layer__btn_white');
-	const blackStoneBtn = document.querySelector('.stone-layer__btn_black');
-	const questionBtn = document.querySelector('.btn__question');
-	const infoBtn = document.querySelector('.info-layer__btn');
-
-	//--------------Bags----------------
-	const whiteStoneBag = document.querySelector('.bag_white');
-	const blackStoneBag = document.querySelector('.bag_black');
-
-	//-------------Stones----------------
-	const whiteStone = document.querySelector('.stone_white');
-	const blackStone = document.querySelector('.stone_black');
-	
-	//-------------StonesImg----------------
-	const blackStoneImg = document.querySelectorAll(".black-stone_img");
-	const whiteStoneImg = document.querySelectorAll(".white-stone_img");
-
-	//-------------Info------------------
-	const info = document.querySelector('.info');
-	let activePage = mainLayer;
-	
-	let stone = "";
-
-	function arrayRandElement(arr) {
-		const rand = Math.floor(Math.random() * arr.length);
-		return arr[rand];
-	}
-
-	function ommanipadmehum(){
-		console.log("ཨོཾ་མ་ཎི་པ་དྨེ་ཧཱུྃ།\n".repeat(108));
-	}
-
-	//document.addEventListener('click',e => console.log(e.target));
 
 	//Buttons push
 	mainBtn.addEventListener('mousedown', () => {

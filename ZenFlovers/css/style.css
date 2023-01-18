@@ -400,6 +400,34 @@ table {
     opacity: 0;
   }
 }
+@-webkit-keyframes infoAnimation {
+  0% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  90% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+@keyframes infoAnimation {
+  0% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  90% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;
@@ -577,6 +605,19 @@ p {
 .btn:active {
   transform: scale(1.2) translateY(0.4rem);
   filter: drop-shadow(0rem 0.4rem 0.4rem rgba(0, 0, 0, 0.3));
+}
+.btn_animated-info::after {
+  content: "";
+  background: no-repeat center/cover url("../../icons/info.png");
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  -webkit-animation: infoAnimation 1.8s infinite;
+          animation: infoAnimation 1.8s infinite;
 }
 
 img {

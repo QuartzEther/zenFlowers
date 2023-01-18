@@ -1,3 +1,43 @@
+function getCookie(name) {
+	// возвращает куки с указанным name,
+	// или undefined, если ничего не найдено
+	let matches = document.cookie.match(new RegExp(
+	  "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+	));
+	return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+function setCookie(name, value, options = {}) {
+	options = {
+		path: '/',
+		// при необходимости добавьте другие значения по умолчанию
+		...options
+	};
+
+	if (options.expires instanceof Date) {
+		options.expires = options.expires.toUTCString();
+	}
+
+	let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+	for (let optionKey in options) {
+		updatedCookie += "; " + optionKey;
+		let optionValue = options[optionKey];
+		if (optionValue !== true) {
+		updatedCookie += "=" + optionValue;
+		}
+	}
+
+	document.cookie = updatedCookie;
+}
+
+function deleteCookie(name) {
+	setCookie(name, "", {
+	  'max-age': -1
+	})
+}
+//-------------------------------------------------------
+
 window.onload = startPreloadChain;
 
 function startPreloadChain(){
@@ -19,12 +59,28 @@ function loadData(path){
 }
 
 function randomData(data){
-	const statement = data.statements[Math.floor(Math.random() * Object.keys(data.statements).length+1)];
-	const pict =  Object.keys(data.pictures[statement.img]).length>1 ? 
-			data.pictures[statement.img][Math.floor(Math.random() * Object.keys(data.pictures[statement.img]).length)]
-			: data.pictures[statement.img];
-	
-	preloadImg(pict, fillValues, statement);	
+	if(getCookie("statement") == undefined){
+		console.log(getCookie("statement")+" "+getCookie("pict"));
+
+		const statement = data.statements[Math.floor(Math.random() * Object.keys(data.statements).length+1)];
+		const pict =  Object.keys(data.pictures[statement.img]).length>1 ? 
+				data.pictures[statement.img][Math.floor(Math.random() * Object.keys(data.pictures[statement.img]).length)]
+				: data.pictures[statement.img];
+
+		let date = new Date(Date.now() + 1000*60*60*24);
+		date = date.toUTCString();
+		setCookie("statement",statement.id,{ expires: date});
+		setCookie("pict",pict,{ expires: date});
+		
+		preloadImg(pict, fillValues, statement);
+	}else{
+		console.log(getCookie("statement")+" "+getCookie("pict"));
+
+		const statement = data.statements[getCookie("statement")];
+		const pict =  getCookie("pict");
+
+		preloadImg(pict, fillValues, statement);
+	}
 }
 
 function preloadImg(source, callback, statement) {
@@ -60,10 +116,23 @@ function init()
 	console.log(":::INIT:::");
 	const loadLayer = document.querySelector('.loading-layer');
 	loadLayer.style.display = 'none';
-	const mainLayer = document.querySelector('.about-layer');
-	mainLayer.style.display = 'flex';
 
-	bodyListener();
+
+	if(getCookie("isFirstVisit") == undefined){
+		let date = new Date(Date.now() + 1000*60*60*24*30);
+		date = date.toUTCString();
+		setCookie("isFirstVisit",false,{ expires: date});
+
+		const mainLayer = document.querySelector('.about-layer');
+		mainLayer.style.display = 'flex';
+		bodyListener();
+	}else{
+		const info = document.querySelector('.info');
+		info.style.display = 'block';
+		const meditationLayer = document.querySelector('.meditation-layer');
+		meditationLayer.style.display = 'flex';
+	}
+
 	initControls();
 }
 
@@ -76,7 +145,6 @@ function bodyListener(){
 	function bodyClicked(){	
 		const info = document.querySelector('.info');
 		info.style.display = 'block';
-
 		mainLayer.style.setProperty('display', 'none');
 		meditationLayer.style.setProperty('display', 'flex');
 		body.removeEventListener('click', bodyClicked, false);

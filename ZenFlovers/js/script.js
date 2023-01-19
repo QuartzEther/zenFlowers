@@ -59,6 +59,7 @@ function loadData(path){
 }
 
 function randomData(data){
+	//deleteCookie("statement");
 	if(getCookie("statement") == undefined){
 		console.log(getCookie("statement")+" "+getCookie("pict"));
 
@@ -117,6 +118,7 @@ function init()
 	const loadLayer = document.querySelector('.loading-layer');
 	loadLayer.style.display = 'none';
 
+	//deleteCookie("isFirstVisit");
 
 	if(getCookie("isFirstVisit") == undefined){
 		let date = new Date(Date.now() + 1000*60*60*24*30);

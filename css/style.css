@@ -583,14 +583,8 @@ p {
   position: fixed;
   right: 1.5rem;
   bottom: 0.8rem;
-  font-size: 1.8rem;
-  opacity: 0.6;
-}
-.copyright a {
-  text-decoration: none;
-  color: #000000;
-  font-weight: bold;
-  font-size: 1.7rem;
+  font-size: 5rem;
+  opacity: 1;
 }
 
 .info {

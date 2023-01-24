@@ -68,7 +68,13 @@ function randomData(data){
 				data.pictures[statement.img][Math.floor(Math.random() * Object.keys(data.pictures[statement.img]).length)]
 				: data.pictures[statement.img];
 
-		let date = new Date(Date.now() + 1000*60*60*24);
+	//next day at 8:00
+		let date = new Date(Date.now());
+		if (date.getHours()>=8){
+		date.setDate(date.getDate() + 1);
+		}
+		date.setHours(8,0,0,0);
+
 		date = date.toUTCString();
 		setCookie("statement",statement.id,{ expires: date});
 		setCookie("pict",pict,{ expires: date});

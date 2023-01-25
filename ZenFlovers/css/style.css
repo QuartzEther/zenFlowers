@@ -554,12 +554,6 @@ p {
   margin-bottom: 0.2rem !important;
 }
 
-.back {
-  position: fixed;
-  right: 2rem;
-  top: 1.8rem;
-}
-
 .meditation-layer {
   display: flex;
   flex-direction: column;
@@ -599,6 +593,12 @@ p {
   top: 1.8rem;
 }
 
+.back {
+  position: fixed;
+  right: 2rem;
+  top: 1.8rem;
+}
+
 .btn {
   transition: 0.35s all;
   height: 4rem;
@@ -623,7 +623,7 @@ p {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: 1;
   -webkit-animation: infoAnimation 1.8s infinite;
           animation: infoAnimation 1.8s infinite;
 }
